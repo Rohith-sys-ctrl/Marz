@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MARZ | Mobile Repair Management</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="header">
+
+    <div class="logo">
+        MARZ
+    </div>
+
+
+<nav>
+
+    <a href="#home">
+        Home
+    </a>
+
+    <a
+        href="#dashboard"
+        onclick="if (!isMarzLoggedIn()) { openLoginForm(); return false; }"
+    >
+        Repairs
+    </a>
+
+    <a
+        href="#customers"
+        onclick="if (!isMarzLoggedIn()) { openLoginForm(); return false; }"
+    >
+        Customers
+    </a>
+
+    <a
+        href="#stock"
+        onclick="if (!isMarzLoggedIn()) { openLoginForm(); return false; }"
+    >
+        Stock
+    </a>
+
+    <a
+        href="#reports"
+        onclick="if (!isMarzLoggedIn()) { openLoginForm(); return false; }"
+    >
+        Reports
+    </a>
+    <a
+    href="#settings"
+    onclick="if (!isMarzLoggedIn()) { openLoginForm(); return false; }"
+>
+    Settings
+</a>
+
+</nav>
+
+    <button
+     class="login-btn"
+     type="button"
+     onclick="openLoginForm()"
+>    
+      Login
+
+    </button>
+
+</header>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main>
+
+
+<!-- =========================================
+     HERO SECTION
+========================================= -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+    <p class="small-title">
+        MOBILE REPAIR MANAGEMENT
+    </p>
+
+
+    <h1>
+
+        Run Your Repair Shop
+        <br>
+
+        With
+        <span>MARZ</span>
+
+    </h1>
+
+
+    <p>
+
+        Manage repairs, customers, stock,
+        invoices and business reports
+        from one powerful dashboard.
+
+    </p>
+
+
+    <button
+        class="start-btn"
+        onclick="openDashboard()"
+    >
+
+        Start Managing →
+
+    </button>
+
+</section>
+
+
+
+<!-- =========================================
+     DASHBOARD
+========================================= -->
+
+<section
+    class="dashboard"
+    id="dashboard"
+>
+
+
+    <!-- DASHBOARD HEADER -->
+
+    <div class="dashboard-title">
+
+        <div>
+
+            <p class="small-title">
+                MARZ CONTROL CENTER
+            </p>
+
+            <h2>
+                Dashboard
+            </h2>
+
+        </div>
+
+
+        <div class="date">
+
+            Shop Overview
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         STAT CARDS
+    ========================================= -->
+
+    <div class="stats">
+
+
+        <!-- ACTIVE REPAIRS -->
+
+        <div class="stat-card">
+
+            <span>
+                🔧
+            </span>
+
+            <p>
+                Active Repairs
+            </p>
+
+            <h3 id="activeRepairs">
+                0
+            </h3>
+
+        </div>
+
+
+
+        <!-- CUSTOMERS -->
+
+        <div class="stat-card">
+
+            <span>
+                👥
+            </span>
+
+            <p>
+                Customers
+            </p>
+
+            <h3 id="customerCount">
+                0
+            </h3>
+
+        </div>
+
+
+
+        <!-- STOCK -->
+
+        <div class="stat-card">
+
+            <span>
+                📦
+            </span>
+
+            <p>
+                Stock Items
+            </p>
+
+            <h3 id="stockCount">
+                0
+            </h3>
+
+        </div>
+
+
+
+        <!-- REVENUE -->
+
+        <div class="stat-card">
+
+            <span>
+                ₹
+            </span>
+
+            <p>
+                Today's Revenue
+            </p>
+
+            <h3 id="todayRevenue">
+                ₹0
+            </h3>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         DASHBOARD GRID
+    ========================================= -->
+
+    <div class="dashboard-grid">
+
+
+
+        <!-- =====================================
+             RECENT REPAIRS
+        ====================================== -->
+
+        <div class="panel">
+
+
+            <div class="panel-header">
+
+                <h3>
+                    Recent Repairs
+                </h3>
+
+
+                <button
+                    onclick="openRepairForm()"
+                >
+                    + New Repair
+                </button>
+
+            </div>
+
+
+
+            <div id="repairList">
+
+                <div class="empty-repairs">
+
+                    <p>
+                        No repairs added yet.
+                    </p>
+
+                    <span>
+                        Create your first repair
+                        using the button above.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================
+             QUICK ACTIONS
+        ====================================== -->
+
+        <div class="panel">
+
+
+            <div class="panel-header">
+
+                <h3>
+                    Quick Actions
+                </h3>
+
+            </div>
+
+
+
+            <div class="actions">
+
+
+                <!-- NEW REPAIR -->
+
+                <button
+                    onclick="openRepairForm()"
+                >
+
+                    🔧
+                    New Repair
+
+                </button>
+
+
+
+                <!-- ADD CUSTOMER -->
+
+                <button
+                    onclick="openCustomerForm()"
+                >
+
+                    👤
+                    Add Customer
+
+                </button>
+
+
+
+                <!-- ADD STOCK -->
+
+                <button
+                    onclick="openStockForm()"
+                >
+
+                    📦
+                    Add Stock
+
+                </button>
+
+
+
+                <!-- CREATE INVOICE -->
+
+                <button
+                    onclick="openInvoiceForm()"
+                >
+
+                    🧾
+                    Create Invoice
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     CUSTOMERS
+========================================= -->
+
+<section
+    class="customers-section"
+    id="customers"
+>
+
+
+    <div class="section-heading">
+
+
+        <div>
+
+            <p class="small-title">
+                MARZ DATABASE
+            </p>
+
+            <h2>
+                Customers
+            </h2>
+
+        </div>
+
+
+
+        <button
+            class="start-btn"
+            onclick="openCustomerForm()"
+        >
+
+            + Add Customer
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         CUSTOMER SEARCH
+    ====================================== -->
+
+    <div class="customer-search">
+
+        <input
+            type="search"
+            id="customerSearch"
+            placeholder="🔎 Search customers by name, phone or email..."
+            oninput="searchCustomers()"
+        >
+
+    </div>
+
+
+
+    <!-- =====================================
+         CUSTOMER LIST
+    ====================================== -->
+
+    <div
+        id="customerList"
+        class="customer-grid"
+    >
+
+
+        <div class="empty-customers">
+
+            <p>
+                No customers added yet.
+            </p>
+
+            <span>
+                Add your first customer
+                using the button above.
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     STOCK MANAGEMENT
+========================================= -->
+
+<section
+    class="stock-section"
+    id="stock"
+>
+
+
+    <div class="section-heading">
+
+
+        <div>
+
+            <p class="small-title">
+                MARZ INVENTORY
+            </p>
+
+            <h2>
+                Stock Management
+            </h2>
+
+        </div>
+
+
+
+        <button
+            class="start-btn"
+            onclick="openStockForm()"
+        >
+
+            + Add Stock
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         STOCK SEARCH
+    ====================================== -->
+
+    <div class="customer-search">
+
+        <input
+            type="search"
+            id="stockSearch"
+            placeholder="🔎 Search stock by item name or category..."
+            oninput="searchStock()"
+        >
+
+    </div>
+
+
+
+    <!-- =====================================
+         STOCK LIST
+    ====================================== -->
+
+    <div
+        id="stockList"
+        class="stock-grid"
+    >
+
+
+        <div class="empty-stock">
+
+            <p>
+                No stock added yet.
+            </p>
+
+            <span>
+                Add your first spare part
+                using the button above.
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     REPORTS
+========================================= -->
+
+<section
+    class="reports-section"
+    id="reports"
+>
+
+
+    <div class="section-heading">
+
+
+        <div>
+
+            <p class="small-title">
+                MARZ ANALYTICS
+            </p>
+
+            <h2>
+                Reports
+            </h2>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         REPORT CARDS
+    ====================================== -->
+
+    <div class="reports-grid">
+
+
+        <!-- TOTAL REVENUE -->
+
+        <div class="report-card">
+
+            <span>
+                Total Revenue
+            </span>
+
+            <strong id="reportTotalRevenue">
+                ₹0
+            </strong>
+
+        </div>
+
+
+
+        <!-- TODAY'S REVENUE -->
+
+        <div class="report-card">
+
+            <span>
+                Today's Revenue
+            </span>
+
+            <strong id="reportTodayRevenue">
+                ₹0
+            </strong>
+
+        </div>
+
+
+
+        <!-- TOTAL REPAIRS -->
+
+        <div class="report-card">
+
+            <span>
+                Total Repairs
+            </span>
+
+            <strong id="reportTotalRepairs">
+                0
+            </strong>
+
+        </div>
+
+
+
+        <!-- TOTAL CUSTOMERS -->
+
+        <div class="report-card">
+
+            <span>
+                Total Customers
+            </span>
+
+            <strong id="reportTotalCustomers">
+                0
+            </strong>
+
+        </div>
+
+
+
+        <!-- STOCK ITEMS -->
+
+        <div class="report-card">
+
+            <span>
+                Stock Items
+            </span>
+
+            <strong id="reportTotalStock">
+                0
+            </strong>
+
+        </div>
+
+
+
+        <!-- DELIVERED REPAIRS -->
+
+        <div class="report-card">
+
+            <span>
+                Delivered Repairs
+            </span>
+
+            <strong id="reportDeliveredRepairs">
+                0
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+<!-- =========================================
+     SHOP SETTINGS
+========================================= -->
+
+<section
+    class="shop-profile-section"
+    id="settings"
+>
+
+    <div class="shop-profile-container">
+
+        <!-- SECTION HEADING -->
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="small-title">
+                    MARZ BUSINESS
+                </p>
+
+                <h2>
+                    Shop Profile
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- SHOP PROFILE CARD -->
+
+        <div class="shop-profile-card">
+
+
+            <!-- HEADER -->
+
+            <div class="shop-profile-header">
+
+                <div class="shop-profile-icon">
+                    🏪
+                </div>
+
+                <div>
+
+                    <h2>
+                        Shop Information
+                    </h2>
+
+                    <p>
+                        Manage your business details
+                        for MARZ invoices and dashboard.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form
+                id="shopProfileForm"
+                class="shop-profile-form"
+                onsubmit="
+                    event.preventDefault();
+                    saveShopProfile();
+                "
+            >
+
+
+                <!-- SHOP NAME -->
+
+                <div
+                    class="shop-profile-group full-width"
+                >
+
+                    <label for="shopName">
+                        Shop Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="shopName"
+                        placeholder="Example: Fix Wave Mobiles"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- OWNER -->
+
+                <div class="shop-profile-group">
+
+                    <label for="shopOwner">
+                        Owner Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="shopOwner"
+                        placeholder="Owner name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="shop-profile-group">
+
+                    <label for="shopPhone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="shopPhone"
+                        placeholder="Shop phone number"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="shop-profile-group">
+
+                    <label for="shopEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="shopEmail"
+                        placeholder="shop@example.com"
+                    >
+
+                </div>
+
+
+                <!-- GST -->
+
+                <div class="shop-profile-group">
+
+                    <label for="shopGST">
+                        GST Number
+                        <span>(Optional)</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="shopGST"
+                        placeholder="GST number"
+                    >
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div
+                    class="shop-profile-group full-width"
+                >
+
+                    <label for="shopAddress">
+                        Shop Address
+                    </label>
+
+                    <textarea
+                        id="shopAddress"
+                        placeholder="Enter complete shop address"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- SAVE -->
+
+                <button
+                    type="submit"
+                    class="shop-profile-save"
+                >
+
+                    💾 Save Shop Profile
+
+                </button>
+
+
+            </form>
+        <!-- LIVE SHOP PREVIEW -->
+
+<div class="shop-profile-preview">
+
+    <div class="preview-label">
+        LIVE PREVIEW
+    </div>
+
+    <div class="preview-shop">
+
+        <div class="preview-shop-icon">
+            🏪
+        </div>
+
+        <div class="preview-shop-info">
+
+            <h3 id="previewShopName">
+                Your Shop Name
+            </h3>
+
+            <p id="previewOwner">
+                Owner Name
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="preview-details">
+
+        <div class="preview-detail">
+            <span>📞</span>
+            <p id="previewPhone">
+                Phone number
+            </p>
+        </div>
+
+        <div class="preview-detail">
+            <span>✉️</span>
+            <p id="previewEmail">
+                Email address
+            </p>
+        </div>
+
+        <div class="preview-detail">
+            <span>📍</span>
+            <p id="previewAddress">
+                Shop address
+            </p>
+        </div>
+
+        <div class="preview-detail">
+            <span>🧾</span>
+            <p id="previewGST">
+                GST number
+            </p>
+          </div>
+
+          </div>
+
+        </div>
+
+    </div>
+
+ </div>
+
+</section>
+
+
+
+<!-- =========================================
+     NEW REPAIR MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="repairModal"
+>
+
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <p class="small-title">
+                    MARZ SERVICE
+                </p>
+
+                <h2>
+                    New Repair
+                </h2>
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="close-btn"
+                onclick="closeRepairForm()"
+            >
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+
+        <form
+            id="repairForm"
+            onsubmit="
+                event.preventDefault();
+                saveRepair();
+            "
+        >
+
+
+            <!-- CUSTOMER NAME -->
+
+            <label>
+                Customer Name
+            </label>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Enter customer name"
+                required
+            >
+
+
+
+            <!-- PHONE -->
+
+            <label>
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="phoneNumber"
+                placeholder="Enter phone number"
+                required
+            >
+
+
+
+            <!-- DEVICE -->
+
+            <label>
+                Device
+            </label>
+
+            <input
+                type="text"
+                id="device"
+                placeholder="Example: iPhone 13"
+                required
+            >
+
+
+
+            <!-- PROBLEM -->
+
+            <label>
+                Repair Problem
+            </label>
+
+            <textarea
+                id="problem"
+                placeholder="Describe the problem..."
+                required
+            ></textarea>
+
+
+
+            <!-- PRICE -->
+
+            <label>
+                Repair Price
+            </label>
+
+            <input
+                type="number"
+                id="price"
+                placeholder="₹ 0"
+                min="0"
+            >
+
+
+
+            <!-- STATUS -->
+
+            <label>
+                Repair Status
+            </label>
+
+            <select
+                id="repairStatus"
+            >
+
+                <option value="Pending">
+                    Pending
+                </option>
+
+                <option value="Repairing">
+                    Repairing
+                </option>
+
+                <option value="Ready">
+                    Ready
+                </option>
+
+                <option value="Delivered">
+                    Delivered
+                </option>
+
+            </select>
+
+
+
+            <!-- SAVE -->
+
+            <button
+                type="submit"
+                class="save-repair"
+            >
+
+                Save Repair
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     CUSTOMER MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="customerModal"
+>
+
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <p class="small-title">
+                    MARZ CUSTOMER
+                </p>
+
+                <h2>
+                    Add Customer
+                </h2>
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="close-btn"
+                onclick="closeCustomerForm()"
+            >
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+
+        <form
+            id="customerForm"
+            onsubmit="
+                event.preventDefault();
+                saveCustomer();
+            "
+        >
+
+
+            <!-- NAME -->
+
+            <label>
+                Customer Name
+            </label>
+
+            <input
+                type="text"
+                id="newCustomerName"
+                placeholder="Enter customer name"
+                required
+            >
+
+
+
+            <!-- PHONE -->
+
+            <label>
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="newCustomerPhone"
+                placeholder="Enter phone number"
+                required
+            >
+
+
+
+            <!-- EMAIL -->
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="newCustomerEmail"
+                placeholder="Enter email address"
+            >
+
+
+
+            <!-- ADDRESS -->
+
+            <label>
+                Address
+            </label>
+
+            <textarea
+                id="newCustomerAddress"
+                placeholder="Enter customer address"
+            ></textarea>
+
+
+
+            <!-- SAVE -->
+
+            <button
+                type="submit"
+                class="save-repair"
+            >
+
+                Save Customer
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     STOCK MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="stockModal"
+>
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <p class="small-title">
+                    MARZ INVENTORY
+                </p>
+
+                <h2>
+                    Add Stock
+                </h2>
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="close-btn"
+                onclick="closeStockForm()"
+            >
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+
+        <form
+            id="stockForm"
+            onsubmit="
+                event.preventDefault();
+                saveStock();
+            "
+        >
+
+
+            <!-- ITEM NAME -->
+
+            <div class="form-group">
+
+                <label>
+                    Item Name
+                </label>
+
+                <input
+                    type="text"
+                    id="stockItemName"
+                    placeholder="Example: iPhone 13 Display"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- CATEGORY -->
+
+            <div class="form-group">
+
+                <label>
+                    Category
+                </label>
+
+                <select
+                    id="stockCategory"
+                    required
+                >
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option value="Display">
+                        Display
+                    </option>
+
+                    <option value="Battery">
+                        Battery
+                    </option>
+
+                    <option value="Charging">
+                        Charging
+                    </option>
+
+                    <option value="Camera">
+                        Camera
+                    </option>
+
+                    <option value="Speaker">
+                        Speaker
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- QUANTITY + PRICE -->
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="stockQuantity"
+                        min="0"
+                        placeholder="0"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Price / Unit
+                    </label>
+
+                    <input
+                        type="number"
+                        id="stockPrice"
+                        min="0"
+                        placeholder="₹0"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SUPPLIER -->
+
+            <div class="form-group">
+
+                <label>
+                    Supplier
+                </label>
+
+                <input
+                    type="text"
+                    id="stockSupplier"
+                    placeholder="Supplier name"
+                >
+
+            </div>
+
+
+
+            <!-- SAVE STOCK -->
+
+            <button
+                type="submit"
+                class="start-btn"
+            >
+
+                + Save Stock
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     INVOICE MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="invoiceModal"
+>
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <p class="small-title">
+                    MARZ BILLING
+                </p>
+
+                <h2>
+                    Create Invoice
+                </h2>
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="close-btn"
+                onclick="closeInvoiceForm()"
+            >
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+
+        <form
+            id="invoiceForm"
+            onsubmit="
+                event.preventDefault();
+                createInvoice();
+            "
+        >
+
+
+            <!-- CUSTOMER NAME -->
+
+            <div class="form-group">
+
+                <label>
+                    Customer Name
+                </label>
+
+                <input
+                    type="text"
+                    id="invoiceCustomerName"
+                    placeholder="Customer name"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+                <label>
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="invoicePhone"
+                    placeholder="Phone number"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- DEVICE -->
+
+            <div class="form-group">
+
+                <label>
+                    Device
+                </label>
+
+                <input
+                    type="text"
+                    id="invoiceDevice"
+                    placeholder="Example: iPhone 13"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- SERVICE -->
+
+            <div class="form-group">
+
+                <label>
+                    Repair / Service
+                </label>
+
+                <input
+                    type="text"
+                    id="invoiceService"
+                    placeholder="Example: Display Replacement"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- AMOUNT + PAYMENT -->
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="invoiceAmount"
+                        min="0"
+                        placeholder="₹0"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Payment
+                    </label>
+
+                    <select
+                        id="invoicePayment"
+                        required
+                    >
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Cash">
+                            Cash
+                        </option>
+
+                        <option value="UPI">
+                            UPI
+                        </option>
+
+                        <option value="Card">
+                            Card
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- GENERATE -->
+
+            <button
+                type="submit"
+                class="start-btn"
+            >
+
+                🧾 Generate Invoice
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script src="script.js"></script>
+
+<!-- =========================================
+     MARZ LOGIN MODAL
+========================================= -->
+
+<div
+    class="login-modal"
+    id="loginModal"
+>
+
+    <div class="login-box">
+
+        <button
+            class="login-close"
+            type="button"
+            onclick="closeLoginForm()"
+        >
+            ×
+        </button>
+
+
+        <div class="login-logo">
+            MARZ
+        </div>
+
+
+        <h2>
+            Welcome Back
+        </h2>
+
+        <p class="login-subtitle">
+            Sign in to your MARZ dashboard
+        </p>
+
+
+        <form
+            id="loginForm"
+            onsubmit="loginUser(event)"
+        >
+
+            <div class="login-input-group">
+
+                <label>
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="Enter username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="login-input-group">
+
+                <label>
+                    Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password-btn"
+                        onclick="toggleLoginPassword()"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-submit-btn"
+            >
+                Login
+            </button>
+
+
+            <p
+                class="login-error"
+                id="loginError"
+            ></p>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
